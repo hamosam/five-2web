@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://cqui0modal123"]
+
+[ext_resource type="Script" path="res://quiz_modal.gd" id="1_quiz"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.1, 0.11, 0.14, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.42, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.18, 0.2, 0.26, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.45, 0.55, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.28, 0.32, 0.44, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.8, 0.5, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="QuizModal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_quiz")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.02, 0.04, 0.75)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(660, 560)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 22
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_font_sizes/font_size = 22
+text = "📜 쪽지 #1 : 음성 언어의 특징"
+horizontal_alignment = 1
+
+[node name="SubHeaderLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.75, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "[국어] 음성 언어와 문자 언어의 특성, 매체별 표현 효과"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.96, 0.96, 1)
+theme_override_font_sizes/font_size = 17
+text = "다음 중 ‘음성 언어’에 대한 설명으로\n알맞지 않은 것은 어느 것입니까?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HintLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "💡 힌트: 말소리는 멀리 있는 사람에게 직접 들려주기 어려워요."
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="OptionButton0" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "① 말소리를 통해 생각이나 느낌을 전달한다."
+
+[node name="OptionButton1" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "② 표정이나 몸짓, 말투 등을 함께 활용할 수 있다."
+
+[node name="OptionButton2" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "③ 공간의 제약을 받지 않고 먼 곳까지 쉽게 전달된다."
+
+[node name="OptionButton3" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "④ 말하는 즉시 사라지므로 기록으로 남기기가 어렵다."
+
+[node name="OptionButton4" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "⑤ 듣는 사람의 반응을 살피며 내용을 바로 수정할 수 있다."
+
+[node name="FeedbackLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "※ 문제를 푸는 동안 괴물은 멈춰있습니다. 안심하고 풀어보세요!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "닫기 (나중에 다시 풀기 / ESC)"
