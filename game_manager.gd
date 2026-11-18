@@ -1,8 +1,11 @@
 extends Node
 
 @export var total_notes: int = 10
+@export var max_lives: int = 3
 
 var collected_notes: int = 0
+var lives: int = 3
+var hit_cooldown: float = 0.0
 var is_game_over: bool = false
 var is_game_won: bool = false
 var is_solving_quiz: bool = false
@@ -43,6 +46,8 @@ var heartbeat_timer: float = 0.0
 
 func _ready() -> void:
 	collected_notes = 0
+	lives = max_lives
+	hit_cooldown = 0.0
 	is_game_over = false
 	is_game_won = false
 	is_solving_quiz = false
@@ -200,6 +205,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if is_game_over or is_game_won:
 		return
+
+	if hit_cooldown > 0.0:
+		hit_cooldown -= delta
 
 	# 쪽지 메시지 표시 타이머
 	if msg_timer > 0.0:
@@ -429,7 +437,28 @@ func _resume_gameplay() -> void:
 
 func _update_note_ui() -> void:
 	if note_count_label:
-		note_count_label.text = "국어 쪽지: %d / %d" % [collected_notes, total_notes]
+		var hearts: String = "❤️".repeat(max(0, lives)) + "🖤".repeat(max(0, max_lives - lives))
+		note_count_label.text = "국어 쪽지: %d / %d   |   목숨: %s" % [collected_notes, total_notes, hearts]
+
+func on_player_hit() -> void:
+	if is_game_over or is_game_won or hit_cooldown > 0.0:
+		return
+	lives -= 1
+	hit_cooldown = 2.5
+	_update_note_ui()
+
+	if lives <= 0:
+		game_over()
+		return
+
+	if has_method("trigger_glitch_burst"):
+		trigger_glitch_burst(0.85)
+	if jumpscare_player:
+		jumpscare_player.volume_db = -8.0
+		jumpscare_player.play()
+	if message_label:
+		message_label.text = "⚠️ 괴물에게 부딪혔습니다! (남은 목숨: %d개)\n괴물이 잠시 안개 속으로 물러납니다!" % lives
+		msg_timer = 3.5
 
 func game_over() -> void:
 	if is_game_won:
@@ -447,6 +476,7 @@ func game_over() -> void:
 	if heartbeat_player:
 		heartbeat_player.stop()
 	if jumpscare_player:
+		jumpscare_player.volume_db = 0.0
 		jumpscare_player.play()
 
 	if game_over_panel:
